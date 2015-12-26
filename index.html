@@ -70,8 +70,17 @@
         $("#response").empty();
         var url = "https://dfz45lqgl6.execute-api.us-east-1.amazonaws.com/prod/screens";
         $.post(url, JSON.stringify(editor.getValue()), function (response) {
-            $("#response").append($("<p>").text(response.url))
-                    .append($("<img>").addClass("img-responsive").attr("src", response.url));
+            var url = $("<p>").text(response.url);
+            var dimensions = $("<p>");
+
+            var image = new Image();
+            image.src = response.url;
+            image.className = "img-responsive";
+            image.onload = function () {
+                dimensions.text(image.naturalHeight + "x" + image.naturalWidth);
+            };
+
+            $("#response").append(url, dimensions, image);
         });
     });
 </script>
