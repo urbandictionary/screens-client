@@ -11,12 +11,29 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
+    <style>
+        #response {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        #response img {
+            border: 1px solid black;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
 
-<div id="editor_holder"></div>
-<button id="submit" class="btn btn-default btn-block">Render</button>
-<div id="response"></div>
+<div class="container">
+    <div class="row">
+        <div id="editor_holder"></div>
+        <button id="submit" class="btn btn-default btn-block">Render</button>
+    </div>
+    <div class="row">
+        <div id="response"></div>
+    </div>
+</div>
 
 <script>
     var editor = new JSONEditor(document.getElementById('editor_holder'), {
@@ -53,7 +70,8 @@
         $("#response").empty();
         var url = "https://dfz45lqgl6.execute-api.us-east-1.amazonaws.com/prod/screens";
         $.post(url, JSON.stringify(editor.getValue()), function (response) {
-            $("#response").append($("<p>").text(response.url)).append($("<img>").attr("src", response.url));
+            $("#response").append($("<p>").text(response.url))
+                    .append($("<img>").addClass("img-responsive").attr("src", response.url));
         });
     });
 </script>
