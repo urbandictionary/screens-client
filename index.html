@@ -75,19 +75,23 @@
         $("#response").empty();
         var url = "https://dfz45lqgl6.execute-api.us-east-1.amazonaws.com/prod/screens";
         $.post(url, JSON.stringify(editor.getValue()), function (response) {
-            var url = $("<p>").text(response.url);
-            var dimensions = $("<p>");
+            if (response.url) {
+                var url = $("<p>").text(response.url);
+                var dimensions = $("<p>");
 
-            var image = new Image();
-            image.src = response.url;
-            image.className = "img-responsive";
-            image.onload = function () {
-                dimensions.text(image.naturalHeight + "✕" + image.naturalWidth +
-                        " (" + (image.naturalHeight / 300).toFixed(2) + "✕"
-                        + (image.naturalWidth / 300).toFixed(2) + " @ 300 dpi)");
-            };
+                var image = new Image();
+                image.src = response.url;
+                image.className = "img-responsive";
+                image.onload = function () {
+                    dimensions.text(image.naturalHeight + "✕" + image.naturalWidth +
+                            " (" + (image.naturalHeight / 300).toFixed(2) + "✕"
+                            + (image.naturalWidth / 300).toFixed(2) + " @ 300 dpi)");
+                };
 
-            $("#response").append(url, dimensions, image);
+                $("#response").append(url, dimensions, image);
+            } else {
+                $("#response").text(JSON.stringify(response));
+            }
         });
     });
 </script>
