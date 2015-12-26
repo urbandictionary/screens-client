@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <script src="https://cdn.rawgit.com/jdorn/json-editor/master/dist/jsoneditor.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="editor_holder"></div>
+<button id='submit'>Submit</button>
+<div id="response"></div>
+
+<script>
+    var editor = new JSONEditor(document.getElementById('editor_holder'), {
+        schema: {
+            type: "object",
+            title: "screens",
+            properties: {
+                word: {
+                    type: "string"
+                },
+                meaning: {
+                    type: "string"
+                },
+                file: {
+                    type: "string",
+                    enum: [
+                        "card",
+                        "mug"
+                    ],
+                    required: true
+                }
+            }
+        }
+    });
+
+    $("#submit").click(function () {
+        $("#response").empty();
+        var url = "https://dfz45lqgl6.execute-api.us-east-1.amazonaws.com/prod/screens";
+        $.post(url, JSON.stringify(editor.getValue()), function (response) {
+            $("#response").append($("<p>").text(response.url));
+            $("#response").append($("<img>").attr("src", response.url));
+        });
+    });
+</script>
+</body>
+</html>
