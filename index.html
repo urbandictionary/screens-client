@@ -53,18 +53,10 @@
                 meaning: {
                     type: "string",
                     format: "textarea"
-                },
-                fontSize: {
-                    type: "integer",
-                    enum: [10, 20, 30, 40, 50, 60, 70],
-                    default: 70
-                },
+                }
                 file: {
                     type: "string",
-                    enum: [
-                        "card",
-                        "mug"
-                    ],
+                    enum: ["mug","card"],
                     required: true
                 }
             }
