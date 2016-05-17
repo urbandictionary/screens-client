@@ -40,24 +40,36 @@
         theme: "bootstrap3",
         schema: {
             type: "object",
-            title: "screens",
+            title: "file",
             options: {
                 disable_collapse: true,
                 disable_edit_json: true,
                 disable_properties: true
             },
             properties: {
+                file: {
+                    type: "string",
+                    enum: ["mug", "card", "tshirt"],
+                    required: true
+                },
+                width: {
+                    type: "integer"
+                },
+                height: {
+                    type: "integer"
+                },
+                margin: {
+                    type: "array",
+                    items: {
+                        type: "integer"
+                    }
+                },
                 word: {
                     type: "string"
                 },
                 meaning: {
                     type: "string",
                     format: "textarea"
-                },
-                file: {
-                    type: "string",
-                    enum: ["mug", "card"],
-                    required: true
                 },
                 redacted: {
                     type: "boolean"
