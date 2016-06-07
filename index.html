@@ -40,41 +40,217 @@
         theme: "bootstrap3",
         schema: {
             type: "object",
-            title: "file",
+            title: "Type",
             options: {
                 disable_collapse: true,
                 disable_edit_json: true,
-                disable_properties: true
+                disable_properties: true,
+                keep_oneof_values: false
             },
-            properties: {
-                file: {
+            oneOf: [
+              {
+                title: "mug",
+                type: "object",
+                properties: {
+                  file: {
                     type: "string",
-                    enum: ["mug", "card", "tshirt"],
+                    required: true,
+                    default: "mug",
+                    options: { hidden: true }
+                  },
+                  width: {
+                      type: "integer"
+                  },
+                  height: {
+                      type: "integer"
+                  },
+                  word: {
+                    type: "string",
                     required: true
+                  },
+                  meaning: {
+                      type: "string",
+                      format: "textarea",
+                      required: true
+                  },
+                  redacted: {
+                      type: "boolean"
+                  },
+                  rerender: {
+                    type: "boolean"
+                  }
                 },
-                width: {
-                    type: "integer"
+                additionalProperties: false
+              },
+              {
+                title: "card",
+                type: "object",
+                properties: {
+                  file: {
+                    type: "string",
+                    required: true,
+                    default: "card",
+                    options: { hidden: true }
+                  },
+                  width: {
+                      type: "integer"
+                  },
+                  height: {
+                      type: "integer"
+                  },
+                  word: {
+                    type: "string",
+                    required: true
+                  },
+                  meaning: {
+                      type: "string",
+                      format: "textarea",
+                      required: true
+                  },
+                  random: {
+                      type: "number"
+                  },
+                  rerender: {
+                    type: "boolean"
+                  }
                 },
-                height: {
-                    type: "integer"
-                },
-                margin: {
+                additionalProperties: false
+              },
+              {
+                title: "tshirt",
+                type: "object",
+                properties: {
+                  file: {
+                    type: "string",
+                    required: true,
+                    default: "tshirt",
+                    options: { hidden: true }
+                  },
+                  width: {
+                      type: "integer"
+                  },
+                  height: {
+                      type: "integer"
+                  },
+                  word: {
+                    type: "string",
+                    required: true
+                  },
+                  margin: {
+                    title: "Margin [TOP RIGHT BOTTOM LEFT]",
                     type: "array",
                     items: {
-                        type: "integer"
+                      type: "integer"
                     }
-                },
-                word: {
-                    type: "string"
-                },
-                meaning: {
-                    type: "string",
-                    format: "textarea"
-                },
-                redacted: {
+                  },
+                  rerender: {
                     type: "boolean"
-                }
-            }
+                  }
+                },
+                additionalProperties: false
+              },
+              {
+                title: "tshirt-product",
+                type: "object",
+                properties: {
+                  file: {
+                    type: "string",
+                    required: true,
+                    default: "tshirt-product",
+                    options: { hidden: true }
+                  },
+                  width: {
+                      type: "integer"
+                  },
+                  height: {
+                      type: "integer"
+                  },
+                  image: {
+                    title: "Image filename (without extension)",
+                    type: "string",
+                    required: true
+                  },
+                  rerender: {
+                    type: "boolean"
+                  }
+                },
+                additionalProperties: false
+              },
+              {
+                title: "mug-product",
+                type: "object",
+                properties: {
+                  file: {
+                    type: "string",
+                    required: true,
+                    default: "mug-product",
+                    options: { hidden: true }
+                  },
+                  width: {
+                      type: "integer"
+                  },
+                  height: {
+                      type: "integer"
+                  },
+                  image: {
+                    title: "Image filename (without extension)",
+                    type: "string",
+                    required: true
+                  },
+                  angle: {
+                    type: "integer",
+                    enum: [0, 90, 180],
+                    required: true
+                  },
+                  rerender: {
+                    type: "boolean"
+                  }
+                },
+                additionalProperties: false
+              },
+              {
+                title: "social",
+                type: "object",
+                properties: {
+                  file: {
+                    type: "string",
+                    required: true,
+                    default: "social",
+                    options: { hidden: true }
+                  },
+                  defid: {
+                    type: "integer",
+                    required: true
+                  },
+                  word: {
+                    type: "string",
+                    required: true
+                  },
+                  meaning: {
+                    type: "string",
+                    format: "textarea",
+                    required: true
+                  },
+                  example: {
+                    type: "string",
+                    format: "textarea",
+                    required: true
+                  },
+                  media: {
+                    type: "string",
+                    enum: ["facebook", "twitter", "instagram", "tumblr", "pinterest"],
+                    required: true
+                  },
+                  redacted: {
+                    type: "boolean"
+                  },
+                  rerender: {
+                    type: "boolean"
+                  }
+                },
+                additionalProperties: false
+              }
+            ]
         }
     });
 
