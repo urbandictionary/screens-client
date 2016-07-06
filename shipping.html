@@ -171,6 +171,11 @@
         $("#response").empty();
         var url = "https://uy0jt6oxt8.execute-api.us-east-1.amazonaws.com/prod/shopify-shipping";
         $.post(url, JSON.stringify(editor.getValue()), function (response) {
+          if (response.rates) {
+            response.rates.forEach(function (rate) {
+              rate.total_price = rate.total_price / 100;
+            });
+          }
           $("#response").text(JSON.stringify(response, null, 2));
         });
     });
