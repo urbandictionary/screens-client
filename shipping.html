@@ -118,7 +118,28 @@
                       },
                       properties: {
                         sku: {
-                          type: "string"
+                          type: "string",
+                          options: {
+                            enum_titles: [
+                              "Mug",
+                              "Tshirt",
+                              "2016 Desk Calendar by Urban Dictionary",
+                              "Urban Dictionary The Game",
+                              "Awesome Sauce Letterpress Card",
+                              "Cactus Legs Letterpress Card",
+                              "Smitten Kitten Letterpress Card",
+                            ]
+                          },
+                          enum: [
+                            "PRNT-MUG",
+                            "PRNT-TSHIRT",
+                            "978-1-4494-6566-7",
+                            "79346-00176",
+                            "HL-1070",
+                            "HL-1055",
+                            "HL-1063"
+                          ],
+                          required: true
                         },
                         quantity: {
                           type: "integer"
