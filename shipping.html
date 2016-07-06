@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <script src="https://cdn.rawgit.com/jdorn/json-editor/master/dist/jsoneditor.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+    <style>
+        #response {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        #response img {
+            border: 1px solid black;
+            margin: 0 auto;
+        }
+        [data-schemapath='root.margin'] > .well {
+          padding: 0;
+        }
+        [data-schemapath='root.margin'] > .well > div {
+          overflow: hidden;
+        }
+        [data-schemapath='root.margin'] > .well .well {
+          float: left;
+          padding: 0;
+          width: 25%;
+          margin: 0;
+        }
+        [data-schemapath='root.margin'] > .well label,
+        [data-schemapath='root.margin'] > .well .btn-group {
+          display: none;
+        }
+        [data-schemapath='root.margin'] > .well .form-group {
+          margin: 0;
+          padding: 0;
+        }
+        [data-schemapath='root.margin'] h3 {
+          font-size: 14px;
+          font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div id="editor_holder"></div>
+        <button id="submit" class="btn btn-default btn-block">Render</button>
+    </div>
+    <div class="row">
+        <div id="response"></div>
+    </div>
+</div>
+
+<script>
+    var editor = new JSONEditor(document.getElementById('editor_holder'), {
+        theme: "bootstrap3",
+        schema: {
+            type: "object",
+            title: "Shipping Cost Check",
+            options: {
+                disable_collapse: true,
+                disable_edit_json: true,
+                disable_properties: true,
+                keep_oneof_values: false
+            },
+            properties: {
+              destination: {
+                type: "object",
+                properties: {
+                  country: {
+                    type: "string"
+                  },
+                  postal_code: {
+                    type: "string"
+                  }
+                }
+              },
+              sku: {
+                type: "string"
+              },
+              quantity: {
+                type: "integer"
+              },
+              weight: {
+                type: "integer"
+              }
+            }
+        }
+    });
+
+    $("#submit").click(function () {
+        $("#response").empty();
+        var url = "https://uy0jt6oxt8.execute-api.us-east-1.amazonaws.com/prod/shopify-shipping";
+        $.post(url, JSON.stringify(editor.getValue()), function (response) {
+            if (response.url) {
+                var url = $("<p>").text(response);
+
+                $("#response").append(url);
+            } else {
+                $("#response").text(JSON.stringify(response));
+            }
+        });
+    });
+</script>
+</body>
+</html>
