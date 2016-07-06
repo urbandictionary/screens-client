@@ -64,33 +64,82 @@
         theme: "bootstrap3",
         schema: {
             type: "object",
-            title: "Shipping Cost Check",
+            title: " ",
             options: {
                 disable_collapse: true,
                 disable_edit_json: true,
                 disable_properties: true,
-                keep_oneof_values: false
             },
             properties: {
-              destination: {
+              rate: {
                 type: "object",
+                title: "Shipping Cost Check",
+                options: {
+                    disable_collapse: true,
+                    disable_edit_json: true,
+                    disable_properties: true,
+                },
                 properties: {
-                  country: {
-                    type: "string"
+                  destination: {
+                    type: "object",
+                    options: {
+                        disable_collapse: true,
+                        disable_edit_json: true,
+                        disable_properties: true,
+                    },
+                    properties: {
+                      country: {
+                        type: "string"
+                      },
+                      postal_code: {
+                        type: "string"
+                      }
+                    }
                   },
-                  postal_code: {
-                    type: "string"
+                  items: {
+                    type: "array",
+                    options: {
+                        disable_array_reorder: true,
+                        disable_collapse: true
+                    },
+                    default: [{
+                      sku: 'PRNT-MUG',
+                      quantity: 1,
+                      properties: {
+                        printful_variant_id: 1320
+                      }
+                    }],
+                    items: {
+                      type: "object",
+                      options: {
+                          disable_collapse: true,
+                          disable_edit_json: true,
+                          disable_properties: true,
+                      },
+                      properties: {
+                        sku: {
+                          type: "string"
+                        },
+                        quantity: {
+                          type: "integer"
+                        },
+                        properties: {
+                          type: "object",
+                          options: {
+                              disable_collapse: true,
+                              disable_edit_json: true,
+                              disable_properties: true,
+                          },
+                          properties: {
+                            printful_variant_id: {
+                              type: "string"
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 }
-              },
-              sku: {
-                type: "string"
-              },
-              quantity: {
-                type: "integer"
-              },
-              weight: {
-                type: "integer"
               }
             }
         }
