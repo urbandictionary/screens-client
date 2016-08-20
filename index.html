@@ -160,10 +160,12 @@
                             options: {hidden: true}
                         },
                         width: {
-                            type: "integer"
+                            type: "integer",
+                            default: 3600
                         },
                         height: {
-                            type: "integer"
+                            type: "integer",
+                            default: 4800
                         },
                         word: {
                             type: "string",
@@ -181,7 +183,7 @@
                             items: {
                                 type: "integer"
                             },
-                            default: [0, 0, 0, 0]
+                            default: [700, 0, 0, 0]
                         },
                         rerender: {
                             type: "boolean"
@@ -204,6 +206,10 @@
                         },
                         height: {
                             type: "integer"
+                        },
+                        color: {
+                            type: "string",
+                            default: "ffffff"
                         },
                         image: {
                             title: "Image filename (without extension)",
