@@ -172,7 +172,7 @@
 
     $("#submit").click(function () {
         $("#response").empty();
-        var url = "https://uy0jt6oxt8.execute-api.us-east-1.amazonaws.com/prod/shopify-shipping";
+        var url = "https://da72r10d51.execute-api.us-east-1.amazonaws.com/production/shopify-shipping";
         $.post(url, JSON.stringify(editor.getValue()), function (response) {
           if (response.rates) {
             response.rates.forEach(function (rate) {
