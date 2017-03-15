@@ -302,7 +302,7 @@
 
     $("#submit").click(function () {
         $("#json, #images").empty();
-        var url = "https://screens-lambda.udimg.com";
+        var url = "https://screens-lambda.udimg.com/screens";
         $.post(url, JSON.stringify(editor.getValue()), function (response) {
             $("#json").text(JSON.stringify(response));
 
