@@ -302,7 +302,7 @@
 
     $("#submit").click(function () {
         $("#json, #images").empty();
-        var url = "https://bfv6mze2t2.execute-api.us-east-1.amazonaws.com/production/screens";
+        var url = "https://screens-lambda.udimg.com";
         $.post(url, JSON.stringify(editor.getValue()), function (response) {
             $("#json").text(JSON.stringify(response));
 

@@ -172,7 +172,7 @@
 
     $("#submit").click(function () {
         $("#response").empty();
-        var url = "https://da72r10d51.execute-api.us-east-1.amazonaws.com/production/shopify-shipping";
+        var url = "https://shopify-shipping.udimg.com";
         $.post(url, JSON.stringify(editor.getValue()), function (response) {
           if (response.rates) {
             response.rates.forEach(function (rate) {
